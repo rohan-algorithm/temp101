@@ -114,7 +114,18 @@ const Board = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <button className="search-button">🔍</button>
+         <button className="search-button">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width="24"
+    height="24"
+    fill="currentColor"
+  >
+    <path d="M10 2a8 8 0 105.292 14.584l4.577 4.577a1 1 0 101.414-1.414l-4.577-4.577A8 8 0 0010 2zm0 2a6 6 0 11-4.242 10.242A6 6 0 0110 4z" />
+  </svg>
+</button>
+
         </div>
       </div>
 

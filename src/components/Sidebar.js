@@ -67,7 +67,7 @@ const Sidebar = () => {
           width={50}
           height={50}
           src="https://img.freepik.com/premium-photo/3d-avatar-cartoon-character_113255-103130.jpg" alt="User Profile" />
-        <span>User Name</span>
+        <span>User</span>
       </div>
     </div>
   );
