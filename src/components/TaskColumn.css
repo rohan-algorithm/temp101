@@ -1,0 +1,71 @@
+.col {
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
+    height: 80vh; /* Fixed height for each column */
+    overflow-y: auto; /* Enable vertical scroll */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  .taskList {
+    max-height: calc(100% - 50px); /* Adjust for header space */
+    overflow-y: auto;
+    padding: 10px;
+  }
+  
+  .col h1 {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .col.over {
+    border: 2px dashed #007bff; /* Highlight the border when dragging over */
+    background-color: #f0f8ff; /* Light background color for feedback */
+    transition: background-color 0.3s;
+  }
+  
+  /* Upcoming Column - Yellow */
+.col.upcoming {
+    background-color: #fff8e1; /* Light yellow */
+    border: 1px solid #ffeb3b; /* Bright yellow border */
+  }
+  
+  /* Overdue Column - Red */
+  .col.overdue {
+    background-color: #ffebee; /* Light red */
+    border: 1px solid #f44336; /* Bright red border */
+  }
+  
+  /* Completed Column - Green */
+  .col.completed {
+    background-color: #e8f5e9; /* Light green */
+    border: 1px solid #4caf50; /* Bright green border */
+  }
+  
+  /* Column Header */
+  .col h1 {
+    text-align: center;
+    margin: 10px auto;
+    padding: 5px 10px;
+    font-weight: 600;
+    color: white;
+    font-size: 20px;
+    border-radius: 5px;
+  }
+  
+  .col.upcoming h1 {
+    background-color: #ffc107; /* Yellow header for Upcoming */
+  }
+  
+  .col.overdue h1 {
+    background-color: #d32f2f; /* Red header for Overdue */
+  }
+  
+  .col.completed h1 {
+    background-color: #388e3c; /* Green header for Completed */
+  }
+  
