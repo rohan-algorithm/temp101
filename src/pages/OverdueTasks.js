@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import TaskItem from '../components/TaskItem';
 import './OverdueTasks.css';
 
-const OverdueTasks = ({ tasks, setTasks }) => {
+const OverdueTasks = () => {
   const [overdueTasks, setOverdueTasks] = useState([]);
+  const [allTasks, setallTasks] = useState([]);
+
   const [filteredTasks, setFilteredTasks] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [priorityFilter, setPriorityFilter] = useState('All');
@@ -11,9 +13,10 @@ const OverdueTasks = ({ tasks, setTasks }) => {
   useEffect(() => {
     const storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
     const overdue = storedTasks.filter((task) => task.status === 'Overdue');
+    setallTasks(storedTasks);
     setOverdueTasks(overdue);
     setFilteredTasks(overdue); // Initialize with all overdue tasks
-  }, [tasks]);
+  }, [allTasks]);
 
   useEffect(() => {
     const filtered = overdueTasks.filter((task) => {
@@ -54,7 +57,7 @@ const OverdueTasks = ({ tasks, setTasks }) => {
       {filteredTasks.length > 0 ? (
         <div className="tasks-list">
           {filteredTasks.map((task) => (
-            <TaskItem key={task.id} task={task} tasks={tasks} setTasks={setTasks} />
+            <TaskItem key={task.id} task={task} tasks={allTasks} setTasks={setallTasks} />
           ))}
         </div>
       ) : (

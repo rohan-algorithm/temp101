@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import TaskItem from '../components/TaskItem';
 import './CompletedTasks.css';
 
-const CompletedTasks = ({ tasks, setTasks }) => {
+const CompletedTasks = () => {
   const [completedTasks, setCompletedTasks] = useState([]);
+  const [allTasks, setallTasks] = useState([]);
   const [filteredTasks, setFilteredTasks] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [priorityFilter, setPriorityFilter] = useState('All');
@@ -11,9 +12,10 @@ const CompletedTasks = ({ tasks, setTasks }) => {
   useEffect(() => {
     const storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
     const completed = storedTasks.filter((task) => task.status === 'Completed');
+    setallTasks(storedTasks);
     setCompletedTasks(completed);
     setFilteredTasks(completed);
-  }, [tasks]);
+  }, [allTasks]);
 
   useEffect(() => {
     const filtered = completedTasks.filter((task) => {
@@ -54,7 +56,7 @@ const CompletedTasks = ({ tasks, setTasks }) => {
       {filteredTasks.length > 0 ? (
         <div className="tasks-list">
           {filteredTasks.map((task) => (
-            <TaskItem key={task.id} task={task} tasks={tasks} setTasks={setTasks} />
+            <TaskItem key={task.id} task={task} tasks={allTasks} setTasks={setallTasks} />
           ))}
         </div>
       ) : (

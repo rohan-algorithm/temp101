@@ -15,7 +15,7 @@ const Board = () => {
     id: '',
     title: '',
     description: '',
-    dueDate: new Date().toISOString().split("T")[0], // Default to today
+    dueDate: new Date().toISOString().split("T")[0], 
     priority: 'Medium',
     status: 'Upcoming',
   });
@@ -83,6 +83,7 @@ const Board = () => {
     });
 
     toast.success("Task added successfully!");
+    setTask({ title: '', description: '', dueDate: '', priority: 'Low' });
     setIsModalOpen(false);
   };
 

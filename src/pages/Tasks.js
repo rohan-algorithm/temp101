@@ -2,20 +2,21 @@ import React, { useEffect, useState } from 'react';
 import TaskItem from '../components/TaskItem';
 import './Tasks.css';
 
-const Tasks = ({ tasks, setTasks }) => {
+const Tasks = () => { 
   const [allTasks, setAllTasks] = useState([]);
   const [filteredTasks, setFilteredTasks] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [priorityFilter, setPriorityFilter] = useState('All');
 
+
   useEffect(() => {
     const storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
     setAllTasks(storedTasks);
     setFilteredTasks(storedTasks);
-  }, [tasks]);
+  }, []); 
+
 
   useEffect(() => {
-    // Filter tasks based on search query and priority
     const filtered = allTasks.filter((task) => {
       const matchesSearch = task.title.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesPriority = priorityFilter === 'All' || task.priority === priorityFilter;
@@ -28,7 +29,6 @@ const Tasks = ({ tasks, setTasks }) => {
     <div className="tasks-page">
       <h1>All Tasks</h1>
 
-      {/* Filter and Search Section */}
       <div className="filter-section">
         <input
           type="text"
@@ -37,7 +37,6 @@ const Tasks = ({ tasks, setTasks }) => {
           onChange={(e) => setSearchQuery(e.target.value)}
           className="search-bar"
         />
-
         <select
           value={priorityFilter}
           onChange={(e) => setPriorityFilter(e.target.value)}
@@ -50,11 +49,15 @@ const Tasks = ({ tasks, setTasks }) => {
         </select>
       </div>
 
-      {/* Task List */}
-      {filteredTasks.length > 0 ? (
+      {filteredTasks && filteredTasks.length > 0 ? (
         <div className="tasks-list">
           {filteredTasks.map((task) => (
-            <TaskItem key={task.id} task={task} tasks={tasks} setTasks={setTasks} />
+            <TaskItem 
+              key={task.id} 
+              task={task} 
+              tasks={allTasks} 
+              setTasks={setAllTasks}
+            />
           ))}
         </div>
       ) : (

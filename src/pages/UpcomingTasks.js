@@ -2,19 +2,23 @@ import React, { useEffect, useState } from 'react';
 import TaskItem from '../components/TaskItem';
 import './UpcomingTasks.css';
 
-const UpcomingTasks = ({ tasks, setTasks }) => {
+const UpcomingTasks = () => {
   const [upcomingTasks, setUpcomingTasks] = useState([]);
+  const [allTasks, setAllTasks] = useState([]);
   const [filteredTasks, setFilteredTasks] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [priorityFilter, setPriorityFilter] = useState('All');
 
+  // Load tasks from local storage and filter for "Upcoming" status on component mount
   useEffect(() => {
     const storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
     const upcoming = storedTasks.filter((task) => task.status === 'Upcoming');
+    setAllTasks(storedTasks);
     setUpcomingTasks(upcoming);
     setFilteredTasks(upcoming); // Initialize with all upcoming tasks
-  }, [tasks]);
+  }, [allTasks]);
 
+  // Filter tasks based on search query and priority filter
   useEffect(() => {
     const filtered = upcomingTasks.filter((task) => {
       const matchesSearch = task.title.toLowerCase().includes(searchQuery.toLowerCase());
@@ -54,7 +58,12 @@ const UpcomingTasks = ({ tasks, setTasks }) => {
       {filteredTasks.length > 0 ? (
         <div className="tasks-list">
           {filteredTasks.map((task) => (
-            <TaskItem key={task.id} task={task} tasks={tasks} setTasks={setTasks} />
+            <TaskItem 
+              key={task.id} 
+              task={task} 
+              tasks={allTasks} // Pass upcomingTasks as the task list
+              setTasks={setAllTasks} // Pass setUpcomingTasks for task updates
+            />
           ))}
         </div>
       ) : (
